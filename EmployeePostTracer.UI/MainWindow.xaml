@@ -216,7 +216,7 @@
                         </Grid.ColumnDefinitions>
                         <Button x:Name="Button_OpenAccountEdit" Content="Редактировать профиль" HorizontalAlignment="Center" VerticalAlignment="Center" Height="44" Width="138" Click="Button_OpenAccountEdit_Click" Grid.Column="0"/>
                         <Button x:Name="Button_AccountDelete" Content="Удалить аккаунт" HorizontalAlignment="Center" Grid.Column="1" VerticalAlignment="Center" Height="44" Width="138" Click="Button_AccountDelete_Click"/>
-                        <Button x:Name="Button_AccountExit" Content="Удалить аккаунт" HorizontalAlignment="Center" Grid.Column="2" VerticalAlignment="Center" Height="44" Width="138" Click="Button_AccountExit_Click"/>
+                        <Button x:Name="Button_AccountExit" Content="Выйти из аккаунта" HorizontalAlignment="Center" Grid.Column="2" VerticalAlignment="Center" Height="44" Width="138" Click="Button_AccountExit_Click"/>
                     </Grid>
                 </Grid>
             </TabItem>

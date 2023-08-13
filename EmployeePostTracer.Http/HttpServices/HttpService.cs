@@ -116,9 +116,12 @@ public class HttpService : IHttpEmployeeService
     }
 
 
-    public async Task UpdateAccount(UpdateEmployeeRequest requestEmployee) => await SetUpPutRequest<UpdateEmployeeRequest>(requestEmployee, $"/Employee/{id}");
-  
+    public async Task UpdateAccount(UpdateEmployeeRequest requestEmployee)
+    {
+        var id = await GetEmployeeIdFromToken();
 
+        await SetUpPutRequest<UpdateEmployeeRequest>(requestEmployee, $"/Employee/{id}");
+    }
 
     public async Task EditLetter(UpdateLetterRequest requestLetter, int id) => await SetUpPutRequest<UpdateLetterRequest>(requestLetter, $"/Letter/{id}");
     
