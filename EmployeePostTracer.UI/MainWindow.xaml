@@ -18,9 +18,10 @@
                     </Grid.RowDefinitions>
 
                     <Label Content="Введите почту" HorizontalAlignment="Left" Margin="347,10,0,0" Grid.Row="1" VerticalAlignment="Top" />
-                    <TextBox x:Name="TextBox_EmailAuthorization" HorizontalAlignment="Center" Margin="0,50,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" Height="25"/>
-                    <Label Content="Введите пароль" HorizontalAlignment="Left" Margin="347,10,0,0" Grid.Row="2" VerticalAlignment="Top"/>
-                    <TextBox x:Name="TextBox_PasswordAuthorization" HorizontalAlignment="Center" Margin="0,50,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" Height="25"/>
+                    <TextBox x:Name="TextBox_EmailAuthorization" HorizontalAlignment="Center" Margin="0,40,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" Height="25"/>
+                    <Label Content="Введите пароль" HorizontalAlignment="Left" Margin="347,101,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.RowSpan="2"/>
+                    <TextBox x:Name="TextBox_PasswordAuthorization" HorizontalAlignment="Center" Margin="0,30,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" Height="25"/>
+                    <Label x:Name="Label_UncorrectData" Content="" Grid.Row="2" Margin="289,56,225,10" Visibility="Hidden"/>
                     <Button x:Name="Button_Authorization" Content="Войти" HorizontalAlignment="Left" Margin="328,25,0,0" Grid.Row="3" VerticalAlignment="Top" Height="40" Width="128" Click="Button_Authorization_Click"/>
                     <Button x:Name="Button_TransitionToRegistration" Content="Регистрация" HorizontalAlignment="Left" Margin="328,0,0,0" VerticalAlignment="Center" Height="40" Width="128" Grid.Row="0" Click="Button_TransitionToRegistration_Click"/>
                 </Grid>
@@ -54,6 +55,7 @@
                     <TextBox x:Name="TextBox_PasswordRegistration" HorizontalAlignment="Center" Margin="0,46,0,0" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" Height="25"/>
                     <Button x:Name="Button_Registration" Content="Зарегестрироваться" HorizontalAlignment="Center" Grid.Row="4" VerticalAlignment="Center" Height="40" Width="128" Click="Button_Registration_Click"/>
                     <Button x:Name="Button_TransitionToAuthorization" Content="Авторизация" HorizontalAlignment="Left" Margin="328,0,0,0" VerticalAlignment="Center" Height="40" Width="128" Grid.Row="0" Click="Button_TransitionToAuthorization_Click"/>
+                    <Label x:Name="Label_UnuniqEmail" Content="" HorizontalAlignment="Left" Margin="481,0,0,0" Grid.Row="4" VerticalAlignment="Center" Width="127" Visibility="Hidden"/>
                 </Grid>
             </TabItem>
             <TabItem x:Name="TabItem_IncomingEmails" Header="входящие" Visibility="Hidden">
@@ -191,7 +193,7 @@
                     </Grid>
                 </Grid>
             </TabItem>
-            <TabItem x:Name="TabItem_Account" Header="аккаунт" Visibility="Hidden">
+            <TabItem x:Name="TabItem_Account" Header="аккаунт" Visibility="Visible">
                 <Grid Background="#FFE5E5E5">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="20*"/>
@@ -206,8 +208,8 @@
                         </Grid.ColumnDefinitions>
                         <Button x:Name="Button_BackAccaunt" Grid.Column="1" Content="Назад" HorizontalAlignment="Center" VerticalAlignment="Center" Height="28" Width="131" Click="Button_BackAccaunt_Click"/>
                     </Grid>
-                    <TextBlock x:Name="TextBlock_Fio" HorizontalAlignment="Center" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Center" Width="262" Height="21"/>
-                    <TextBlock x:Name="TextBlock_Email" HorizontalAlignment="Center" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Center" Width="178" Height="28"/>
+                    <TextBlock x:Name="TextBlock_Fio" HorizontalAlignment="Center" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Center" Width="246" Height="21"/>
+                    <TextBlock x:Name="TextBlock_Email" HorizontalAlignment="Left" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="178" Height="26" Margin="274,37,0,0"/>
                     <Grid Grid.Row="3">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>

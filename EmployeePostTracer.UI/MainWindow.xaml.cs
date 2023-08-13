@@ -2,6 +2,7 @@
 using EmployeePostTracer.Http.HttpServices;
 using EmployeePostTracer.Http.HttpServices.Interfaces;
 using EmployeePostTracer.Http.Models;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Reflection.PortableExecutable;
@@ -30,6 +31,7 @@ public partial class MainWindow : Window
 
     private void Button_Registration_Click(object sender, RoutedEventArgs e)
     {
+        Label_UnuniqEmail.Visibility = Visibility.Hidden;
         var employee = new RegistrationEmployeeRequest()
         {
             FirstName = TextBox_Name.Text,
@@ -45,9 +47,10 @@ public partial class MainWindow : Window
 
         TextBox_Name.Text = "";
         TextBox_LastName.Text = "";
-        TextBox_LastName.Text = "";
+        TextBox_PasswordRegistration.Text = "";
         TextBox_EmailRegistration.Text = "";
         TextBox_Patronymic.Text = "";
+
     }
 
     private void Button_TransitionToRegistration_Click(object sender, RoutedEventArgs e) => TabControl_MainTabControl.SelectedIndex = 1;
@@ -56,20 +59,29 @@ public partial class MainWindow : Window
 
     private async void Button_Authorization_Click(object sender, RoutedEventArgs e)
     {
-        var loginData = new LoginRequest()
+        try
         {
-            Email = TextBox_EmailAuthorization.Text,
-            Password = TextBox_PasswordAuthorization.Text,
-        };
+            Label_UncorrectData.Visibility = Visibility.Hidden;
+            var loginData = new LoginRequest()
+            {
+                Email = TextBox_EmailAuthorization.Text,
+                Password = TextBox_PasswordAuthorization.Text,
+            };
 
-        await _httpService.Login(loginData);
+            await _httpService.Login(loginData);
 
-        TabControl_MainTabControl.SelectedIndex = 2;
+            TabControl_MainTabControl.SelectedIndex = 2;
 
-        FillInformation();
+            FillInformation();
 
-        TextBox_EmailAuthorization.Text = "";
-        TextBox_PasswordAuthorization.Text = "";
+            TextBox_EmailAuthorization.Text = "";
+            TextBox_PasswordAuthorization.Text = "";
+        }
+        catch 
+        {
+            Label_UncorrectData.Visibility = Visibility.Visible;
+            Label_UncorrectData.Content = "Логин или пароль введены не верно";
+        }
     }
 
     private void Button_BackAccaunt_Click(object sender, RoutedEventArgs e) => TabControl_MainTabControl.SelectedIndex = 2;
@@ -80,8 +92,8 @@ public partial class MainWindow : Window
 
         var employeeInfo = await _httpService.GetById();
 
-        TextBlock_Fio.Text = $"{employeeInfo.LastName.Replace(" ", "")} {employeeInfo.FirstName.Replace(" ", "")} {employeeInfo.Patronymic.Replace(" ", "")}";
-        TextBlock_Email.Text = employeeInfo.Email.Replace(" ", "");
+        TextBlock_Fio.Text = $"ФИО: {employeeInfo.LastName.Replace(" ", "")} {employeeInfo.FirstName.Replace(" ", "")} {employeeInfo.Patronymic.Replace(" ", "")}";
+        TextBlock_Email.Text = $"Почта: {employeeInfo.Email.Replace(" ", "")}";
     }
 
     private void Button_SenderEmails_Click(object sender, RoutedEventArgs e) => TabControl_MainTabControl.SelectedIndex = 3;
@@ -172,8 +184,8 @@ public partial class MainWindow : Window
         TextBlock_Header.Text = letter.Header.Replace(" ", "");
         TextBlock_Content.Text = letter.Content.Replace(" ", "");
         TextBlock_Date.Text += $" {letter.SendingDate}";
-        TextBlock_Sender.Text += $" {letter.Sender.Replace(" ", "")}";
-        TextBlock_Recipient.Text += $" {letter.Recipient.Replace(" ", "")}";
+        TextBlock_Sender.Text += $" {letter.Sender}";
+        TextBlock_Recipient.Text += $" {letter.Recipient}";
     }
 
     private async void MenuItem_ReadSendedLetter_Click(object sender, RoutedEventArgs e)
