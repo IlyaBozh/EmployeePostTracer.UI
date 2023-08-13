@@ -181,8 +181,8 @@ public partial class MainWindow : Window
 
         var letter = await _httpService.GetLetterById(_incomingLetters[ListView_IncomingEmails.SelectedIndex].Id);
 
-        TextBlock_Header.Text = letter.Header.Replace(" ", "");
-        TextBlock_Content.Text = letter.Content.Replace(" ", "");
+        TextBlock_Header.Text = letter.Header;
+        TextBlock_Content.Text = letter.Content;
         TextBlock_Date.Text += $" {letter.SendingDate}";
         TextBlock_Sender.Text += $" {letter.Sender}";
         TextBlock_Recipient.Text += $" {letter.Recipient}";
@@ -194,8 +194,8 @@ public partial class MainWindow : Window
 
         var letter = await _httpService.GetLetterById(_sendedLetters[ListView_SendedEmails.SelectedIndex].Id);
 
-        TextBlock_Header.Text = letter.Header.Replace(" ", "");
-        TextBlock_Content.Text = letter.Content.Replace(" ", "");
+        TextBlock_Header.Text = letter.Header;
+        TextBlock_Content.Text = letter.Content;
         TextBlock_Date.Text += $" {letter.SendingDate}";
         TextBlock_Sender.Text += $" {letter.Sender}";
         TextBlock_Recipient.Text += $" {letter.Recipient}";
