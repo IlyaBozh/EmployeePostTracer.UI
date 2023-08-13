@@ -27,6 +27,10 @@
 
 ![image](https://github.com/IlyaBozh/EmployeePostTracer.UI/assets/86633291/e2497b50-7122-4349-891b-639d059af869)
 
+8. Окно аккаунта
+
+![image](https://github.com/IlyaBozh/EmployeePostTracer.UI/assets/86633291/4ead619e-009c-4d57-b5ab-ee3fab5a37f6)
+
 7. Окно редактирования аккаунта
 
 ![image](https://github.com/IlyaBozh/EmployeePostTracer.UI/assets/86633291/b568ccb7-49f0-4d8e-9780-c7f318b44c1a)
