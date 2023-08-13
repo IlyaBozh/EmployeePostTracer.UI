@@ -12,7 +12,7 @@
    
 ![image](https://github.com/IlyaBozh/EmployeePostTracer.UI/assets/86633291/3de91453-6c55-485c-bb40-f66afacc3b0e)
 
-   Через контекстное меню можно просмотреть письмоы
+   Через контекстное меню можно просмотреть письмо
 ![image](https://github.com/IlyaBozh/EmployeePostTracer.UI/assets/86633291/41d125c3-c1ea-4a62-bfc9-011fc490f319)
 
 4. Окно просмотра письма
