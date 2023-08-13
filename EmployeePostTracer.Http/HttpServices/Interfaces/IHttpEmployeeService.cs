@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using EmployeePostTracer.Http.Models;
 
-namespace EmployeePostTracer.Http.HttpServices.Interfaces
+namespace EmployeePostTracer.Http.HttpServices.Interfaces;
+
+public interface IHttpEmployeeService
 {
-    internal interface IHttpEmployeeService
-    {
-    }
+    Task<int> Register(RegistrationEmployeeRequest request);
+    Task Login(LoginRequest request);
+    Task<EmployeeAllInfoResponse> GetById();
 }
