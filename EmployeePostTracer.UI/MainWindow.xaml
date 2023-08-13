@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EmployeePostTracer.UI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" ResizeMode="NoResize">
     <Grid>
         <TabControl x:Name="TabControl_MainTabControl">
             <TabItem x:Name="TabItem_Authorization" Header="авторизация" Visibility="Hidden">
@@ -193,7 +193,7 @@
                     </Grid>
                 </Grid>
             </TabItem>
-            <TabItem x:Name="TabItem_Account" Header="аккаунт" Visibility="Visible">
+            <TabItem x:Name="TabItem_Account" Header="аккаунт" Visibility="Hidden">
                 <Grid Background="#FFE5E5E5">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="20*"/>
