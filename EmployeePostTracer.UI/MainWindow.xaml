@@ -8,7 +8,7 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <TabControl x:Name="TabControl_MainTabControl">
-            <TabItem x:Name="TabItem_Authorization" Header="авторизация">
+            <TabItem x:Name="TabItem_Authorization" Header="авторизация" Visibility="Hidden">
                 <Grid Background="#FFE5E5E5">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="50*"/>
@@ -25,7 +25,7 @@
                     <Button x:Name="Button_TransitionToRegistration" Content="Регистрация" HorizontalAlignment="Left" Margin="328,0,0,0" VerticalAlignment="Center" Height="40" Width="128" Grid.Row="0" Click="Button_TransitionToRegistration_Click"/>
                 </Grid>
             </TabItem>
-            <TabItem x:Name="TabItem_Registration" Header="регистрация">
+            <TabItem x:Name="TabItem_Registration" Header="регистрация" Visibility="Hidden">
                 <Grid Background="#FFE5E5E5">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="50*"/>
@@ -56,7 +56,7 @@
                     <Button x:Name="Button_TransitionToAuthorization" Content="Авторизация" HorizontalAlignment="Left" Margin="328,0,0,0" VerticalAlignment="Center" Height="40" Width="128" Grid.Row="0" Click="Button_TransitionToAuthorization_Click"/>
                 </Grid>
             </TabItem>
-            <TabItem x:Name="TabItem_IncomingEmails" Header="входящие">
+            <TabItem x:Name="TabItem_IncomingEmails" Header="входящие" Visibility="Hidden">
                 <Grid Background="#FFE5E5E5">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="20*"/>
@@ -69,22 +69,27 @@
                             <ColumnDefinition Width="419*"/>
                             <ColumnDefinition Width="238*"/>
                         </Grid.ColumnDefinitions>
-                        <Button x:Name="Button_SenderEmails" Content="Отправленные письма" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="2" Height="21" Width="151" Click="Button_SenderEmails_Click"/>
+                        <Button x:Name="Button_SenderEmails" Content="Отправленные письма" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="2" Height="21" Width="150" Click="Button_SenderEmails_Click"/>
                         <Button x:Name="Button_Account" Content="Аккаунт" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="2" Height="21" Width="88" Click="Button_Account_Click"/>
-                        <Button x:Name="Button_WriteEmail" Content="Написать письмо" HorizontalAlignment="Center" Grid.Column="2" VerticalAlignment="Top"  Height="21" Width="120" Margin="0,52,0,0"/>
+                        <Button x:Name="Button_WriteEmail" Content="Написать письмо" HorizontalAlignment="Center" Grid.Column="2" VerticalAlignment="Top"  Height="21" Width="120" Margin="0,52,0,0" Click="Button_WriteEmail_Click"/>
                     </Grid>
                     <ListView x:Name="ListView_IncomingEmails" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Width="150">Сотрудник</GridViewColumn>
-                                <GridViewColumn Width="520">Заголовок</GridViewColumn>
-                                <GridViewColumn Width="118">Дата</GridViewColumn>
+                                <GridViewColumn Width="150" DisplayMemberBinding="{Binding Sender}">Сотрудник</GridViewColumn>
+                                <GridViewColumn Width="520" DisplayMemberBinding="{Binding Header}">Заголовок</GridViewColumn>
+                                <GridViewColumn Width="118" DisplayMemberBinding="{Binding SendingDate}">Дата</GridViewColumn>
                             </GridView>
                         </ListView.View>
+                        <ListView.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem x:Name="MenuItem_ReadLetter" Click="MenuItem_ReadLetter_Click" Header="Прочитать"></MenuItem>
+                            </ContextMenu>
+                        </ListView.ContextMenu>
                     </ListView>
                 </Grid>
             </TabItem>
-            <TabItem x:Name="TabItem_SentEmails" Header="отправленные">
+            <TabItem x:Name="TabItem_SentEmails" Header="отправленные" Visibility="Hidden">
                 <Grid Background="#FFE5E5E5">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="20*"/>
@@ -96,20 +101,27 @@
                             <ColumnDefinition Width="70*"/>
                             <ColumnDefinition Width="30*"/>
                         </Grid.ColumnDefinitions>
-                        <Button x:Name="Button_Back" Content="Назад" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Height="21" Width="151"/>
+                        <Button x:Name="Button_Back" Content="Назад" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Height="21" Width="151" Click="Button_Back_Click"/>
                     </Grid>
                     <ListView x:Name="ListView_SendedEmails" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Width="150">Сотрудник</GridViewColumn>
-                                <GridViewColumn Width="520">Заголовок</GridViewColumn>
-                                <GridViewColumn Width="118">Дата</GridViewColumn>
+                                <GridViewColumn Width="150" DisplayMemberBinding="{Binding Sender}">Сотрудник</GridViewColumn>
+                                <GridViewColumn Width="520" DisplayMemberBinding="{Binding Header}">Заголовок</GridViewColumn>
+                                <GridViewColumn Width="118" DisplayMemberBinding="{Binding SendingDate}">Дата</GridViewColumn>
                             </GridView>
                         </ListView.View>
+                        <ListView.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem x:Name="MenuItem_ReadSendedLetter" Click="MenuItem_ReadSendedLetter_Click" Header="Прочитать" ></MenuItem>
+                                <MenuItem x:Name="MenuItem_EditLetter" Click="MenuItem_EditLetter_Click" Header="Редактировать" ></MenuItem>
+                                <MenuItem x:Name="MenuItem_DeleteLetter" Header="Удалить" Click="MenuItem_DeleteLetter_Click" ></MenuItem>
+                            </ContextMenu>
+                        </ListView.ContextMenu>
                     </ListView>
                 </Grid>
             </TabItem>
-            <TabItem x:Name="TabItem_WriteEmail" Header="написать">
+            <TabItem x:Name="TabItem_WriteEmail" Header="написать" Visibility="Hidden">
                 <Grid Background="#FFE5E5E5">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="20*"/>
@@ -123,15 +135,15 @@
                             <ColumnDefinition Width="70*"/>
                             <ColumnDefinition Width="30*"/>
                         </Grid.ColumnDefinitions>
-                        <Button x:Name="Button_Cancel" Grid.Column="1" Content="Отмена" HorizontalAlignment="Center" VerticalAlignment="Center" Height="28" Width="131"/>
+                        <Button x:Name="Button_Cancel" Grid.Column="1" Content="Отмена" HorizontalAlignment="Center" VerticalAlignment="Center" Height="28" Width="131" Click="Button_Cancel_Click"/>
                     </Grid>
                     <ComboBox x:Name="ComboBox_Recipient" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center" Width="266" Height="27"/>
                     <TextBox x:Name="TextBox_Header" HorizontalAlignment="Center" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Center" Width="774" Height="28"/>
                     <TextBox x:Name="TextBox_Content" HorizontalAlignment="Center" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Center" Width="774" Height="195"/>
-                    <Button x:Name="Button_Send" Content="Отправить" HorizontalAlignment="Center" Grid.Row="4" VerticalAlignment="Top" Width="158" Height="28" Margin="0,5,0,0"/>
+                    <Button x:Name="Button_Send" Content="Отправить" HorizontalAlignment="Center" Grid.Row="4" VerticalAlignment="Top" Width="158" Height="28" Margin="0,5,0,0" Click="Button_Send_Click"/>
                 </Grid>
             </TabItem>
-            <TabItem x:Name="TabItem_EditEmail" Header="редактировать">
+            <TabItem x:Name="TabItem_EditEmail" Header="редактировать" Visibility="Hidden">
                 <Grid Background="#FFE5E5E5">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="20*"/>
@@ -144,14 +156,14 @@
                             <ColumnDefinition Width="70*"/>
                             <ColumnDefinition Width="30*"/>
                         </Grid.ColumnDefinitions>
-                        <Button x:Name="Button_CancelEdit" Grid.Column="1" Content="Отмена" HorizontalAlignment="Center" VerticalAlignment="Center" Height="28" Width="131"/>
+                        <Button x:Name="Button_CancelEdit" Grid.Column="1" Content="Отмена" HorizontalAlignment="Center" VerticalAlignment="Center" Height="28" Width="131" Click="Button_CancelEdit_Click"/>
                     </Grid>
                     <TextBox x:Name="TextBox_HeaderEdit" HorizontalAlignment="Center" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Center" Width="774" Height="28"/>
                     <TextBox x:Name="TextBox_ContentEdit" HorizontalAlignment="Center" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Center" Width="774" Height="195"/>
-                    <Button x:Name="Button_Edit" Content="Редактировать" HorizontalAlignment="Center" Grid.Row="3" VerticalAlignment="Top" Width="158" Height="28" Margin="0,5,0,0"/>
+                    <Button x:Name="Button_Edit" Content="Редактировать" HorizontalAlignment="Center" Grid.Row="3" VerticalAlignment="Top" Width="158" Height="28" Margin="0,5,0,0" Click="Button_Edit_Click"/>
                 </Grid>
             </TabItem>
-            <TabItem x:Name="TabItem_Email" Header="письмо">
+            <TabItem x:Name="TabItem_Email" Header="письмо" Visibility="Hidden">
                 <Grid Background="#FFE5E5E5">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="20*"/>
@@ -164,22 +176,22 @@
                             <ColumnDefinition Width="70*"/>
                             <ColumnDefinition Width="30*"/>
                         </Grid.ColumnDefinitions>
-                        <Button x:Name="Button_BackEmail" Grid.Column="1" Content="Назад" HorizontalAlignment="Center" VerticalAlignment="Center" Height="28" Width="131"/>
+                        <Button x:Name="Button_BackEmail" Grid.Column="1" Content="Назад" HorizontalAlignment="Center" VerticalAlignment="Center" Height="28" Width="131" Click="Button_BackEmail_Click"/>
                     </Grid>
                     <TextBlock x:Name="TextBlock_Header" HorizontalAlignment="Center" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Center" Width="774" Height="28"/>
-                    <TextBlock x:Name="TextBlock_ContentEdit" HorizontalAlignment="Center" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Center" Width="774" Height="195"/>
+                    <TextBlock x:Name="TextBlock_Content" HorizontalAlignment="Center" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Center" Width="774" Height="195"/>
                     <Grid Grid.Row="3">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <TextBlock x:Name="TextBlock_Date" HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" Text="Дата отправки: " VerticalAlignment="Center" Width="186" Grid.Column="0"/>
-                        <TextBlock x:Name="TextBlock_Sender" HorizontalAlignment="Left" Margin="13,6,0,0" TextWrapping="Wrap" Text="От:" VerticalAlignment="Top" Width="361" Grid.Column="1"/>
-                        <TextBlock x:Name="TextBlock_Recipient" HorizontalAlignment="Left" Margin="13,28,0,0" TextWrapping="Wrap" Text="Кому:" VerticalAlignment="Top" Width="361" Grid.Column="1"/>
+                        <TextBlock x:Name="TextBlock_Sender" HorizontalAlignment="Left" Margin="13,6,0,0" TextWrapping="Wrap" Text="От: " VerticalAlignment="Top" Width="361" Grid.Column="1"/>
+                        <TextBlock x:Name="TextBlock_Recipient" HorizontalAlignment="Left" Margin="13,28,0,0" TextWrapping="Wrap" Text="Кому: " VerticalAlignment="Top" Width="361" Grid.Column="1"/>
                     </Grid>
                 </Grid>
             </TabItem>
-            <TabItem x:Name="TabItem_Account" Header="аккаунт">
+            <TabItem x:Name="TabItem_Account" Header="аккаунт" Visibility="Hidden">
                 <Grid Background="#FFE5E5E5">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="20*"/>
@@ -192,7 +204,7 @@
                             <ColumnDefinition Width="70*"/>
                             <ColumnDefinition Width="30*"/>
                         </Grid.ColumnDefinitions>
-                        <Button x:Name="Button_BackAccaunt" Grid.Column="1" Content="Назад" HorizontalAlignment="Center" VerticalAlignment="Center" Height="28" Width="131" Click="Button_BackAccaunt_Click_1"/>
+                        <Button x:Name="Button_BackAccaunt" Grid.Column="1" Content="Назад" HorizontalAlignment="Center" VerticalAlignment="Center" Height="28" Width="131" Click="Button_BackAccaunt_Click"/>
                     </Grid>
                     <TextBlock x:Name="TextBlock_Fio" HorizontalAlignment="Center" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Center" Width="262" Height="21"/>
                     <TextBlock x:Name="TextBlock_Email" HorizontalAlignment="Center" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Center" Width="178" Height="28"/>
@@ -200,13 +212,15 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
                             <ColumnDefinition/>
+                            <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
-                        <Button x:Name="Button_OpenAccountEdit" Content="Редактировать профиль" HorizontalAlignment="Center" VerticalAlignment="Center" Height="44" Width="138"/>
-                        <Button x:Name="Button_AccountDelete" Content="Удалить аккаунт" HorizontalAlignment="Center" Grid.Column="1" VerticalAlignment="Center" Height="44" Width="138"/>
+                        <Button x:Name="Button_OpenAccountEdit" Content="Редактировать профиль" HorizontalAlignment="Center" VerticalAlignment="Center" Height="44" Width="138" Click="Button_OpenAccountEdit_Click" Grid.Column="0"/>
+                        <Button x:Name="Button_AccountDelete" Content="Удалить аккаунт" HorizontalAlignment="Center" Grid.Column="1" VerticalAlignment="Center" Height="44" Width="138" Click="Button_AccountDelete_Click"/>
+                        <Button x:Name="Button_AccountExit" Content="Удалить аккаунт" HorizontalAlignment="Center" Grid.Column="2" VerticalAlignment="Center" Height="44" Width="138" Click="Button_AccountExit_Click"/>
                     </Grid>
                 </Grid>
             </TabItem>
-            <TabItem x:Name="TabItem_AccountEdit" Header="редактировать аккаунт">
+            <TabItem x:Name="TabItem_AccountEdit" Header="редактировать аккаунт" Visibility="Hidden">
                 <Grid Background="#FFE5E5E5">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="20*"/>
@@ -220,14 +234,12 @@
                             <ColumnDefinition Width="70*"/>
                             <ColumnDefinition Width="30*"/>
                         </Grid.ColumnDefinitions>
-                        <Button x:Name="Button_CancelAccauntEdit" Grid.Column="1" Content="Назад" HorizontalAlignment="Center" VerticalAlignment="Center" Height="28" Width="131"/>
+                        <Button x:Name="Button_CancelAccauntEdit" Grid.Column="1" Content="Отмена" HorizontalAlignment="Center" VerticalAlignment="Center" Height="28" Width="131" Click="Button_CancelAccauntEdit_Click"/>
                     </Grid>
                     <TextBox x:Name="TextBox_EditName" HorizontalAlignment="Center" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Center" Width="160" Height="30"/>
                     <TextBox x:Name="TextBox_EditLastName" HorizontalAlignment="Center" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Center" Width="160" Height="30"/>
-                    <TextBox x:Name="TextBox_Patronymic1" HorizontalAlignment="Center" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Center" Width="160" Height="30"/>
-                    <Button Content="Button"/>
-                    <Button x:Name="Button_EditAccount" Content="Button" HorizontalAlignment="Center" Margin="0,20,0,0" Grid.Row="4" VerticalAlignment="Top" Width="160" Height="32"/>
-                    <TextBlock TextWrapping="Wrap" Text="TextBlock"/>
+                    <TextBox x:Name="TextBox_EditPatronymic" HorizontalAlignment="Center" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Center" Width="160" Height="30"/>
+                    <Button x:Name="Button_EditAccount" Content="Редактировать" HorizontalAlignment="Center" Margin="0,20,0,0" Grid.Row="4" VerticalAlignment="Top" Width="160" Height="32" Click="Button_EditAccount_Click"/>
                     <Label Content="Имя" HorizontalAlignment="Left" Margin="222,0,0,0" Grid.Row="1" VerticalAlignment="Center"/>
                     <Label Content="Отчество" HorizontalAlignment="Left" Margin="222,0,0,0" Grid.Row="3" VerticalAlignment="Center"/>
                     <Label Content="Фамилия" HorizontalAlignment="Left" Margin="222,0,0,0" Grid.Row="2" VerticalAlignment="Center"/>
